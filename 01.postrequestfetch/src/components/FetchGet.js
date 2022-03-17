@@ -14,15 +14,31 @@ class FetchGet extends React.Component {
 
     render() {
         const { quotes } = this.state;
-        console.log(quotes)
+
+        if(quotes == null){
+
         return (
             <div className="card text-center m-3">
-                <h5 className="card-header">Simple GET Request</h5>
-                <div className="card-body">
-                    
+                <div className="card-body">No Data from response
                 </div>
             </div>
         );
+
+        }else{
+            return (
+                <div className="card text-center m-3">
+                    <div className="card-body">
+                        {quotes.map((quote) => (
+                            <p key={quote.quote}>
+                                {quote.quote} -{quote.author} 
+                            </p>
+                        ))}
+                    </div>
+                </div>
+            );
+
+        }
+
     }
 }
 
