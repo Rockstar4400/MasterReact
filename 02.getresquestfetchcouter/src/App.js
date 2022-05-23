@@ -20,32 +20,34 @@ componentDidMount(){
             quotes: data.quotes,
           })
         );
-
-        }
+  }
 
   render() {
+    var countUp, setCount, url;
+    const quotes = this.state.quotes;
+    if (quotes == null) {
+      return (
+          <FetchGetCounter id="text" message={"No quote"} />
+      );
+    }
+    else {
+      const listItems = quotes.map((quote) => (
+        <figure
+          key={quote.quote}
+          author={quote.author}
+          house={quote.house}
+          className="card-body"
+        >
+          <blockquote>{quote.quote}</blockquote>
+          <blockquote>{quote.author}</blockquote>
+        </figure>
+      ));
 
-     const quotes = this.state.quotes;
-     console.log(quotes)
-      
-    // const listItems = quotes.map((quote) => (
-    //     <figure
-    //       key={quote.quote}
-    //       author={quote.author}
-    //       house={quote.house}
-    //       className="card-body"
-    //     >
-    //       <blockquote>{quote.quote}</blockquote>
-    //     </figure>
-    //   ));
-    //   const max = this.props.quotes.length - 1;
-    //   const random = Math.floor(Math.random() * (max - 0 + 1)) + 0;
-    // if (this.state.quotes == null) {
-         return <FetchGetCounter />;
-    //   } else {
-    //     return <FetchGetCounter id="text" message={listItems[random].key} />;
-    //   }
-     }
+      return (
+           <FetchGetCounter id="text" message={listItems} />
+      );
+    }
+  }
 }
 
 export default App;
