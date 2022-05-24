@@ -4,20 +4,18 @@ import FetchGetCounter from './components/FetchGetCounter';
 class App extends React.Component {
   
     state = {
-        qoutes: null
+        fbCount: null
     }
 
 componentDidMount(){
-
+    const url = 'https://codesignal.com';
     fetch(
-          "https://gist.githubusercontent.com/Rockstar4400/" +
-          "7678c57b0cebc5f740973ecb7a2691d0/raw/2daef0c7cdd39460787b086bb5af6166ebd56d2f/" +
-          "quotes.json"
+        `https://graph.facebook.com/?id=`
       )
         .then((response) => response.json())
         .then((data) =>
           this.setState({
-            quotes: data.quotes,
+            fbCount: data.shares,
           })
         );
   }
