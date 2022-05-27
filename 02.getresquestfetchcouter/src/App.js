@@ -8,7 +8,8 @@ class App extends React.Component {
     }
 
 componentDidMount(){
-    const url = 'https://codesignal.com';
+    const shareUrl = 'https://codesignal.com';
+    
     fetch(
         `https://graph.facebook.com/?id=`
       )
@@ -18,6 +19,13 @@ componentDidMount(){
             fbCount: data.shares,
           })
         );
+
+        // if (isCondition) {
+        //   return promiseB
+        //     .then(() => promiseC);
+        // } else {
+        //   return promiseC;
+        // }
   }
 
   render() {
