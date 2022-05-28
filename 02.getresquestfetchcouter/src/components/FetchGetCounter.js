@@ -4,7 +4,7 @@ const FetchGetCounter = (props) => {
   return (
       
       <div id={props.id}>
-          {props.message}
+          {props.childrens}
       </div>
       );
 }
