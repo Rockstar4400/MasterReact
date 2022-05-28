@@ -4,27 +4,14 @@ import $ from 'jquery';
 
 
 class App extends React.Component {
-  
+    
     state = {
         fbCount: null
     }
 
-componentDidMount(){
-    // const shareUrl = 'https://codesignal.com';
-    
-    // fetch(
-    //     `https://graph.facebook.com/?id=`
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) =>
-    //       this.setState({
-    //         fbCount: data.shares,
-    //       })
-    //     );
+    shareUrl = 'https://belyash.github.io';
 
-    var shareUrl = 'https://belyash.github.io';
-
-    var SocialShares = {
+    SocialShares = {
       fb: {
         url: "https://graph.facebook.com/?id=",
         callback: function (data) {
@@ -51,15 +38,16 @@ componentDidMount(){
       }  
     };
   
-  $(function () {
+
+  helperFunction = (SocialShares, shareUrl) => {
     $('[data-social]').each(function () {
       var $this = $(this),
         social = $this.data('social'),
         oSocial;
-  
       if (SocialShares.hasOwnProperty(social)) {
         oSocial = SocialShares[social];
   
+        console.log(oSocial.url)
         if (oSocial.url) {
           $.getScript(
             oSocial.url + shareUrl + "&callback=SocialShares." + social + ".callback",
@@ -82,35 +70,31 @@ componentDidMount(){
         }
       }
     });
-  });
+  }
+
+  componentDidMount(){
+    if(this.shareUrl !== undefined && this.SocialShares !== undefined){
+      this.helperFunction(this.SocialShares,this.shareUrl);
+    }
   }
 
   render() {
-    var countUp, setCount, url;
-
-    //if (quotes == null) {
+    if (this.SocialShares === undefined) {
       return (
-        
-          <FetchGetCounter id="text" message={"No quote"} >
-            <div class="social">
-              <div class="social__item">
-                <span class="fa fa-facebook" data-count="..." data-social="fb"></span>
+        <div>Nothing</div>
+      );
+    }
+    else {
+      return (
+           <FetchGetCounter id="text" >
+            <div className="social">
+              <div className="social__item">
+                <span className="fa fa-facebook" data-count="..." data-social="fb">facebook</span>
               </div>
             </div>
           </FetchGetCounter>
       );
-    //}
-    // else {
-    //   return (
-    //        <FetchGetCounter id="text" message={""}>
-    //         <div class="social">
-    //           <div class="social__item">
-    //             <span class="fa fa-facebook" data-count="..." data-social="fb"></span>
-    //           </div>
-    //         </div>
-    //        </FetchGetCounter>
-    //   );
-    // }
+    }
   }
 }
 
