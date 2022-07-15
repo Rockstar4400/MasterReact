@@ -22,22 +22,15 @@ const establishDatabaseConnection = async (): Promise<void> => {
 
 const initializeExpress = (): void => {
   const app = express();
-
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded());
-
   app.use(addRespondToResponse);
-
   attachPublicRoutes(app);
-
   app.use('/', authenticateUser);
-
   attachPrivateRoutes(app);
-
   app.use((req, _res, next) => next(new RouteNotFoundError(req.originalUrl)));
   app.use(handleError);
-
   app.listen(process.env.PORT || 3000);
 };
 
